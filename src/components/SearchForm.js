@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import companies from '../data/companies';
 
+import SendRequestDialog from './SendRequestDialog';
+
 const { Text } = Typography;
 
 const Wrapper = styled.div`
@@ -43,6 +45,9 @@ const StyledInput = styled(Input)`
 const SuggestionWrapper = styled.div`
   && {
     padding: 10px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -68,6 +73,7 @@ const renderSuggestion = suggestion => (
 const SearchForm = () => {
   const [fieldValue, setFieldValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [isRequestDialogVisible, setIsRequestDialogVisible] = useState(false);
 
   const onChange = (event, { newValue }) => {
     setFieldValue(newValue);
@@ -90,6 +96,14 @@ const SearchForm = () => {
     <StyledInput placeholder="Entreprise, site web, ..." {...inputProps} />
   );
 
+  const onSelect = () => {
+    setIsRequestDialogVisible(true);
+  };
+
+  const onClose = () => {
+    setIsRequestDialogVisible(false);
+  };
+
   return (
     <Wrapper>
       <Text>Choisissez l&apos;entreprise:</Text>
@@ -106,7 +120,9 @@ const SearchForm = () => {
           suggestionsContainer: 'suggestions_container',
           suggestionsList: 'suggestions_list',
         }}
+        onSuggestionSelected={onSelect}
       />
+      <SendRequestDialog isVisible={isRequestDialogVisible} onClose={onClose} />
     </Wrapper>
   );
 };
