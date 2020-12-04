@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { requestTypes } from '../data/mail';
 import languages from '../data/languages';
-import requestTypes from '../data/requestTypes';
 
 const { TextArea } = Input;
 const { Text } = Typography;
