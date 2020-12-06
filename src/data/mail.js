@@ -12,15 +12,36 @@ const frConf = {
     content: '',
   },
   [COPY_ID]: {
-    object: '',
-    content: '',
+    object: "Droit d'accès aux données personnelles (RGPD article 15)",
+    content: (fullName, additionalInfo) => `Madame, Monsieur,
+
+    Je vous prie de bien vouloir m’indiquer si des données me concernant figurent dans vos fichiers informatisés ou manuels.
+    
+    Dans l’affirmative, je souhaiterais obtenir une copie, en langage clair, de l’ensemble de ces données (y compris celles figurant dans les zones « blocs-notes » ou « commentaires »), en application de l’article 15 du Règlement général sur la protection des données (RGPD).
+    
+    Je vous remercie de me faire parvenir votre réponse dans les meilleurs délais et au plus tard dans un délai d’un mois à compter de la réception de ma demande (article 12.3 du RGPD).
+    
+    A défaut de réponse de votre part dans les délais impartis ou en cas de réponse incomplète, je me réserve la possibilité de saisir la Commission nationale de l’informatique et des libertés (CNIL) d’une réclamation.
+
+    ${
+      additionalInfo
+        ? `
+    Vous pouvez utiliser ces informations complémentaires afin de m'identifier dans votre système :
+    ${additionalInfo}
+
+    `
+        : ''
+    }
+    Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.
+    ${fullName}.
+    `,
   },
 };
 
 const enConf = {
   [DELETE_ID]: {
     object: 'Erasure Request (Article 17 of the GDPR)',
-    content: additionalInfo => `
+    content: (fullName, additionalInfo) => `
     To whom it may concern:
 
     I am writing to request that you erase all my personal information from all your information systems pursuant to Article 17 of the General Data Protection Regulation (GDPR). To the extent that you rely on consent to process my personal data, I withdraw that consent. To the extent that you rely on your 'legitimate interest' to process my personal data, I object to the processing as there are no overriding legitimate grounds.
@@ -39,12 +60,13 @@ const enConf = {
     `
         : ''
     }
-    Kind regards,  
+    Kind regards,
+    ${fullName}.
     `,
   },
   [COPY_ID]: {
     object: 'Subject Access Request (Article 15 of the GDPR)',
-    content: additionalInfo => `
+    content: (fullName, additionalInfo) => `
     To whom it may concern:
 
     I am writing to obtain the following information that I am entitled to receive pursuant to Article 15 of the General Data Protection Regulation (GDPR). Please confirm as to whether or not my personal data is being processed, and, where that is the case, please provide the following information:
@@ -100,7 +122,7 @@ const enConf = {
         : ''
     }
     Kind regards,
-    
+    ${fullName}.
     `,
   },
 };
