@@ -8,8 +8,33 @@ const requestTypes = [
 
 const frConf = {
   [DELETE_ID]: {
-    object: '',
-    content: '',
+    object: "Demande d'effacement de données personnelles (RGPD Article 17)",
+    content: (fullName, additionalInfo) => `
+    Madame, Monsieur,
+
+    En application de l’article 17.1 du Règlement général sur la protection des données (RGPD), je vous prie d’effacer de vos fichiers toutes les données personnelles me concernant.
+
+    Si j'ai consenti au traitement de mes données à caractère personnel (par exemple, conformément à l'Article 6, alinéa 1, ou à l'Article 9, alinéa 2 du RGPD), je retire ce consentement par la présente.
+    En outre, je m'oppose au traitement des données à caractère personnel me concernant (ce qui inclut le profilage), conformément à l'Article 21 du RGPD.
+    
+    Si vous avez communiqué les données à caractère personnel concernées à des tiers, vous devez communiquer ma demande de suppression de ces données, ainsi que toute référence à celles-ci, à chaque destinataire, conformément à l'Article 19 du RGPD. Veuillez également m'informer au sujet de ces destinataires.
+
+    Enfin, je vous prie de m'informer de ces éléments dans les meilleurs délais et au plus tard dans un délai d’un mois à compter de la réception de ce courrier (article 12.3 du RGPD).
+
+    A défaut de réponse de votre part dans les délais impartis ou en cas de réponse incomplète, je saisirai la Commission nationale de l’informatique et des libertés (CNIL) d’une réclamation.
+
+    ${
+      additionalInfo
+        ? `
+    Vous pouvez utiliser ces informations complémentaires afin de m'identifier dans votre système :
+    ${additionalInfo}
+
+    `
+        : ''
+    }
+    Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+    ${fullName}.
+    `,
   },
   [COPY_ID]: {
     object: "Droit d'accès aux données personnelles (RGPD article 15)",
