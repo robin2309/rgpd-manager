@@ -74,6 +74,7 @@ const SearchForm = () => {
   const [fieldValue, setFieldValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [isRequestDialogVisible, setIsRequestDialogVisible] = useState(false);
+  const [selectedEmail, setSelectedEmail] = useState('');
 
   const onChange = (event, { newValue }) => {
     setFieldValue(newValue);
@@ -96,7 +97,8 @@ const SearchForm = () => {
     <StyledInput placeholder="Entreprise, site web, ..." {...inputProps} />
   );
 
-  const onSelect = () => {
+  const onSelect = (e, { suggestion }) => {
+    setSelectedEmail(suggestion.email);
     setIsRequestDialogVisible(true);
   };
 
@@ -122,7 +124,11 @@ const SearchForm = () => {
         }}
         onSuggestionSelected={onSelect}
       />
-      <SendRequestDialog isVisible={isRequestDialogVisible} onClose={onClose} />
+      <SendRequestDialog
+        email={selectedEmail}
+        isVisible={isRequestDialogVisible}
+        onClose={onClose}
+      />
     </Wrapper>
   );
 };

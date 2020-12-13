@@ -152,4 +152,4 @@ const enConf = {
   },
 };
 
-export { requestTypes };
+export { requestTypes, frConf, enConf };
