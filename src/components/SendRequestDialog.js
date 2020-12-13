@@ -1,7 +1,7 @@
 import { Input, Modal, Radio, Typography } from 'antd';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-// import qs from 'qs';
+import qs from 'qs';
 import styled from 'styled-components';
 
 import { enConf, frConf, requestTypes } from '../data/mail';
@@ -54,10 +54,10 @@ const SendRequestDialog = ({ isVisible, onClose, email }) => {
     }
     onClose();
     const { object: subject, content } = getMailConf(language, requestType);
-    const urlMailTo = `mailto:${email}?subject=${subject}&body=${content(
-      fullName,
-      additionalInfo,
-    )}`;
+    const urlMailTo = `mailto:${email}?${qs.stringify({
+      subject,
+      body: content(fullName, additionalInfo),
+    })}`;
     window.open(urlMailTo, '_blank');
   };
 
