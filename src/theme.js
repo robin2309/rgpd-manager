@@ -5,3 +5,8 @@ export const primary = {
   400: '#2B7A78',
   500: '#17252A',
 };
+
+export const grey = {
+  500: '#888888',
+  600: '#666666',
+};

@@ -3,6 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { grey, primary } from '../theme';
 import companies from '../data/companies';
 
 import SendRequestDialog from './SendRequestDialog';
@@ -39,6 +40,15 @@ const Wrapper = styled.div`
 const StyledInput = styled(Input)`
   && {
     width: 100%;
+    background-color: ${primary[200]};
+    border: none;
+    border-radius: 20px;
+    padding: 12px 12px 12px 16px;
+    color: ${grey[600]};
+
+    &&::placeholder {
+      color: ${grey[500]};
+    }
   }
 `;
 
@@ -94,7 +104,10 @@ const SearchForm = () => {
   };
 
   const renderInput = inputProps => (
-    <StyledInput placeholder="Entreprise, site web, ..." {...inputProps} />
+    <StyledInput
+      placeholder="Rechercher une entreprise, un site web"
+      {...inputProps}
+    />
   );
 
   const onSelect = (e, { suggestion }) => {
@@ -108,7 +121,6 @@ const SearchForm = () => {
 
   return (
     <Wrapper>
-      <Text>Choisissez l&apos;entreprise:</Text>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={fetchSuggestions}
